@@ -1,17 +1,17 @@
 const express = require('express');
 const app = express();
-
+const ExpressError = require('./expressError')
 // Check that inputs are valid numbers
 
 function parseNums(nums) {
      if (!nums) {
-        throw new Error('You must provide a list of numbers separated by commas.');
+        throw new ExpressError('You must provide a list of numbers separated by commas.', 400 );
     } 
 
     const numArray = nums.split(',').map(Number);
 
     if (numArray.some(isNaN)) {
-        throw new Error("All values must be valid numbers.");
+        throw new ExpressError("All values must be valid numbers.", 400);
     }
 
     return numArray;
